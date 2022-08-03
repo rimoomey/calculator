@@ -47,17 +47,32 @@ const screen = document.querySelector('p');
 
 function displayText(input) {
 
-    console.log(typeof input);
     screen.textContent = input.join(" ");
 }
 
 
 function addInput(button, input) {
 
-    //only add to input if the length is smaller than 3
-    if(input.length < 3){
+    if(input.length===0) input.push(button.innerHTML);
 
-        if(!(button.innerHTML === "=")) input.push(button.innerHTML);
+    //only add to input if the length is smaller than 3
+    else if(input.length <= 3 && input.length > 0){
+
+        if(!Number.isNaN(parseInt(button.innerHTML))) {
+
+            console.log('fired');
+
+            if(!Number.isNaN(parseInt(input[input.length-1]))) {
+
+                input[input.length-1] = input[input.length-1] + "" +
+                                        button.innerHTML;
+            }
+
+            else input.push(button.innerHTML);
+        }
+
+        else if(!(button.innerHTML === "=") && 
+                input.length < 3) input.push(button.innerHTML);
     }
 
     if(button.innerHTML === 'Clear') {
@@ -77,6 +92,8 @@ buttons.forEach((button) => button.addEventListener('click', function() {
         const operands = input.map((el) => (!Number.isNaN(parseInt(el)) ? 
                                         parseInt(el) : el));
         let outcome;
+
+        console.log(operands);
 
         //operation case
         if(operands[1] === '+') outcome = 
