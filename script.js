@@ -17,6 +17,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
 
+    if(b === 0) return "You can't divide by 0";
     return a/b;
 }
 
@@ -31,7 +32,7 @@ function divide(a, b) {
 function operate(operation, a, b) {
 
     if(!(typeof operation === 'function')) return "Invalid operation";
-    if(!(typeof a === 'number') || !(typeof b === 'number')) return "Non-numeric input";
+    if(!((typeof a === 'number') && (typeof b === 'number'))) return "Non-numeric input";
 
     return operation(a, b);
 }
@@ -72,12 +73,10 @@ buttons.forEach((button) => button.addEventListener('click', function() {
 
     if(button.innerHTML === '=') {
 
-        const operands = input.map((el) => (parseInt(el) ? parseInt(el) : el));
+        const operands = input.map((el) => (!Number.isNaN(parseInt(el)) ? 
+                                        parseInt(el) : el));
         let outcome;
 
-
-        console.table(operands);
-        
         //operation case
         if(operands[1] === '+') outcome = 
                                     operate(add, operands[0], operands[2]);
@@ -93,7 +92,5 @@ buttons.forEach((button) => button.addEventListener('click', function() {
         input.push(outcome.toString());
         displayText(input);
     }
-    console.log(input);
-    console.log(input.length);
     displayText(input);
 }));

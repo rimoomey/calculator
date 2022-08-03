@@ -24,12 +24,12 @@ body {
 
 #middle-buttons {
     display:flex;
-    flex: 3;
+    flex: 5;
 }
 
 #number-buttons {
     display: flex;
-    flex: 2;
+    flex: 3;
 }
 
 .numbers {
@@ -39,18 +39,11 @@ body {
 
 
 #screen {
+    display: flex;
     background-color: lightgray;
-    position: relative;
     border: 2px solid lightblue;
-    flex: 2;
-}
-
-#screen p {
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
+    flex: 1;
+    justify-content: end;
 }
 
 .container {
@@ -61,7 +54,7 @@ body {
 
 button {
     color: blue;
-    flex: 1;
+    flex: 3;
 }
 
 #button-container {
