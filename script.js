@@ -51,6 +51,7 @@ function displayText(input) {
     screen.textContent = input.join(" ");
 }
 
+
 function addInput(button, input) {
 
     //only add to input if the length is smaller than 3
