@@ -20,6 +20,7 @@ function divide(a, b) {
     return a/b;
 }
 
+
 // console.log(add(1,2));
 // console.log(subtract(1,-2));
 // console.log(multiply(1,2));
@@ -27,7 +28,7 @@ function divide(a, b) {
 
 //operate calls any of the functions above
 
-function operator(operation, a, b) {
+function operate(operation, a, b) {
 
     if(!(typeof operation === 'function')) return "Invalid operation";
     if(!(typeof a === 'number') || !(typeof b === 'number')) return "Non-numeric input";
@@ -43,15 +44,56 @@ function operator(operation, a, b) {
 const buttons = document.querySelectorAll('button');
 const screen = document.querySelector('p');
 
-function displayText(button) {
+function displayText(input) {
 
-    if(button.innerHTML==='Clear') {
-
-        screen.textContent = '';
-    }
-
-    else screen.textContent += button.innerHTML;
+    console.log(typeof input);
+    screen.textContent = input.join(" ");
 }
 
+function addInput(button, input) {
+
+    //only add to input if the length is smaller than 3
+    if(input.length < 3){
+
+        if(!(button.innerHTML === "=")) input.push(button.innerHTML);
+    }
+
+    if(button.innerHTML === 'Clear') {
+        
+        input.length = 0;
+    }
+}
+
+let input = [];
+
 buttons.forEach((button) => button.addEventListener('click', function() {
-    displayText(button)}));
+
+    addInput(button, input);
+
+    if(button.innerHTML === '=') {
+
+        const operands = input.map((el) => (parseInt(el) ? parseInt(el) : el));
+        let outcome;
+
+
+        console.table(operands);
+        
+        //operation case
+        if(operands[1] === '+') outcome = 
+                                    operate(add, operands[0], operands[2]);
+        else if(operands[1] === '-') outcome = 
+                                        operate(subtract, operands[0], operands[2]);
+        else if(operands[1] === 'x') outcome = 
+                                        operate(multiply, operands[0], operands[2]);
+        else if(operands[1] === '\u00F7') outcome = 
+                                            operate(divide, operands[0], operands[2]);
+        else outcome = 'error';
+
+        input = [];
+        input.push(outcome.toString());
+        displayText(input);
+    }
+    console.log(input);
+    console.log(input.length);
+    displayText(input);
+}));
