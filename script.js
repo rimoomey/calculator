@@ -40,3 +40,18 @@ function operator(operation, a, b) {
 // console.log(operator(subtract, 2, '-1'));
 // console.log(operator("fun", 2, 1));
 
+const buttons = document.querySelectorAll('button');
+const screen = document.querySelector('p');
+
+function displayText(button) {
+
+    if(button.innerHTML==='Clear') {
+
+        screen.textContent = '';
+    }
+
+    else screen.textContent += button.innerHTML;
+}
+
+buttons.forEach((button) => button.addEventListener('click', function() {
+    displayText(button)}));

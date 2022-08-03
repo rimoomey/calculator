@@ -41,6 +41,7 @@ body {
 #screen {
     background-color: lightgray;
     position: relative;
+    border: 2px solid lightblue;
     flex: 2;
 }
 
